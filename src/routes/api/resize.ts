@@ -31,7 +31,6 @@ resize.get('/', (req, res) => {
     })
     .then((alreadyExist) => {
       if (!alreadyExist) {
-        console.log(`image ${typeof imageWidth} * ${typeof imageHeight}`);
         sharp(`./assets/full/${fileName}`)
           .resize({ width: imageWidth, height: imageHeight })
           .toFile(`./assets/thumb/${resizedFileName}`)
