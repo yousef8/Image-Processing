@@ -48,3 +48,19 @@ There is multiple scripts defined in package.json file and I'm gonna state them 
   - Format the code
 - npm run lint
   - Lint the code and if there a quick possible fix it will do it.
+
+## API Usage
+
+**There is a five images in the assets folder that you can test the API on which are :**
+
+- encenadaport.jpg
+- fjord.jpg
+- icelandwaterfall.jpg
+- palmtunnel.jpg
+- santamonica.jpg
+
+**The syntax of the API is as Follows :**
+http://localhost/api/resize?filename=value&width=value&height=value
+
+**Working Example**
+**http://localhost:3000/api/resize?filename=fjord.jpg&width=150&height=150**
