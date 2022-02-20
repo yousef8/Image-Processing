@@ -1,11 +1,12 @@
 import express from 'express';
-import sharp from 'sharp';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
+import resize from '../../services/resize';
+// import resize from '../../services/resize';
 
-const resize = express.Router();
+const resizeEndPoint = express.Router();
 
-resize.get('/', (req, res) => {
+resizeEndPoint.get('/', (req, res) => {
   const imageWidth: number = parseInt(req.query.width as string);
   const imageHeight: number = parseInt(req.query.height as string);
   const fileName: string = req.query.filename as string;
@@ -31,14 +32,12 @@ resize.get('/', (req, res) => {
     })
     .then((alreadyExist) => {
       if (!alreadyExist) {
-        sharp(`./assets/full/${fileName}`)
-          .resize({ width: imageWidth, height: imageHeight })
-          .toFile(`./assets/thumb/${resizedFileName}`)
+        resize(fileName, imageWidth, imageHeight, resizedFileName)
           .then(() => {
             res.sendFile(path.resolve(`./assets/thumb/${resizedFileName}`));
           })
-          .catch((err) => {
-            res.send(`There was an ${err}`);
+          .catch(() => {
+            res.send("Image doesn't exist in database");
           });
       } else {
         res.sendFile(path.resolve(`./assets/thumb/${resizedFileName}`));
@@ -49,4 +48,4 @@ resize.get('/', (req, res) => {
     });
 });
 
-export default resize;
+export default resizeEndPoint;

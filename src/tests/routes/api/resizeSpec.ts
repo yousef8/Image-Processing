@@ -17,7 +17,7 @@ describe('Test resize endpoint responses', () => {
         'http://localhost:3000/api/resize?filename=ford.jpg&width=200&height=200'
       )
       .then((res) => {
-        expect(res.data).toEqual('There was an Error: Input file is missing');
+        expect(res.data).toEqual("Image doesn't exist in database");
       });
   });
 });

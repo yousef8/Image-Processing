@@ -1,5 +1,5 @@
 import express from 'express';
-import resize from './api/resize';
+import resizeEndPoint from './api/resizeRoute';
 
 const routes = express.Router();
 
@@ -7,6 +7,6 @@ routes.get('/', (req, res) => {
   res.send('add /resize to URL and then query parameters');
 });
 
-routes.use('/resize', resize);
+routes.use('/resize', resizeEndPoint);
 
 export default routes;
