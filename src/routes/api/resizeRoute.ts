@@ -37,6 +37,7 @@ resizeEndPoint.get('/', (req, res) => {
             res.sendFile(path.resolve(`./assets/thumb/${resizedFileName}`));
           })
           .catch(() => {
+            res.status(500);
             res.send("Image doesn't exist in database");
           });
       } else {
@@ -44,6 +45,7 @@ resizeEndPoint.get('/', (req, res) => {
       }
     })
     .catch((err) => {
+      res.status(500);
       res.send(`There was an ${err}`);
     });
 });
