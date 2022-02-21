@@ -33,10 +33,10 @@ resizeEndPoint.get('/', (req, res) => {
     .then((alreadyExist) => {
       if (!alreadyExist) {
         resize(fileName, imageWidth, imageHeight, resizedFileName)
-          .then(() => {
+          .then((): void => {
             res.sendFile(path.resolve(`./assets/thumb/${resizedFileName}`));
           })
-          .catch(() => {
+          .catch((): void => {
             res.status(500);
             res.send("Image doesn't exist in database");
           });
@@ -44,7 +44,7 @@ resizeEndPoint.get('/', (req, res) => {
         res.sendFile(path.resolve(`./assets/thumb/${resizedFileName}`));
       }
     })
-    .catch((err) => {
+    .catch((err: Error): void => {
       res.status(500);
       res.send(`There was an ${err}`);
     });
